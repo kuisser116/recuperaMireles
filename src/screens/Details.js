@@ -1,15 +1,12 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, SafeAreaView } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, SafeAreaView, Image, ScrollView } from 'react-native';
 
 export default function AuPairLisaDetailScreen() {
   const renderStars = (rating) => {
     return Array(5).fill(0).map((_, index) => (
       <Text 
         key={index} 
-        style={[
-          styles.starSymbol, 
-          index < rating ? styles.filledStar : styles.emptyStar
-        ]}
+        style={[styles.starSymbol, index < rating ? styles.filledStar : styles.emptyStar]}
       >
         ★
       </Text>
@@ -18,42 +15,45 @@ export default function AuPairLisaDetailScreen() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.locationContainer}>
-        <Text style={styles.locationText}>San Diego, CA</Text>
-      </View>
-
-      <Text style={styles.titleText}>MEET AU PAIR LISA</Text>
-
-      <View style={styles.imageContainer}>
-        <View style={styles.placeholderImage}>
-          <Text style={styles.crossText}>✕</Text>
+      <ScrollView contentContainerStyle={styles.scrollContainer}>
+        <View style={styles.locationContainer}>
+          <Image source={require('../../assets/mapa.jpg')} style={styles.locationImage} />
+          <Text style={styles.locationText}>San Diego, CA</Text>
         </View>
-      </View>
 
-      <View style={styles.testimonialContainer}>
-        <Text style={styles.testimonialQuote}>
-          "I love to do arts & crafts with the kids where you enjoy going onto adventure."
-        </Text>
-      </View>
+        <Text style={styles.titleText}>MEET AU PAIR LISA</Text>
 
-      <View style={styles.reviewContainer}>
-        <Text style={styles.reviewsTitle}>Lisa's Reviews</Text>
-        <View style={styles.starContainer}>
-          {renderStars(5)}
-          <Text style={styles.reviewCount}>75</Text>
+        <View style={styles.imageContainer}>
+          <View style={styles.placeholderImage}>
+            <Text style={styles.crossText}>✕</Text>
+          </View>
         </View>
-      </View>
 
-      <View style={styles.pricingContainer}>
-        <TouchableOpacity>
-        <Text style={styles.priceText}>$99/night</Text> 
-        <Text style={styles.starContainer}>{renderStars(5)}</Text>
-        </TouchableOpacity>
-       
-        <TouchableOpacity style={styles.availabilityButton}>
-          <Text style={styles.availabilityButtonText}>CHECK AVAILABILITY</Text>
-        </TouchableOpacity>
-      </View>
+        <View style={styles.testimonialContainer}>
+          <Text style={styles.testimonialQuote}>
+            "I love to do arts & crafts with the kids where you enjoy going onto adventure."
+          </Text>
+        </View>
+
+        <View style={styles.reviewContainer}>
+          <Text style={styles.reviewsTitle}>Lisa's Reviews</Text>
+          <View style={styles.starContainer}>
+            {renderStars(5)}
+            <Text style={styles.reviewCount}>75</Text>
+          </View>
+        </View>
+
+        <View style={styles.pricingContainer}>
+          <TouchableOpacity>
+            <Text style={styles.priceText}>$99/night</Text> 
+            <Text style={styles.starContainer}>{renderStars(5)}</Text>
+          </TouchableOpacity>
+         
+          <TouchableOpacity style={styles.availabilityButton}>
+            <Text style={styles.availabilityButtonText}>CHECK AVAILABILITY</Text>
+          </TouchableOpacity>
+        </View>
+      </ScrollView>
     </SafeAreaView>
   );
 }
@@ -64,14 +64,20 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     paddingHorizontal: 16,
   },
+  scrollContainer: {
+    paddingBottom: 16,  // Espacio adicional al final del contenido
+  },
   locationContainer: {
     paddingTop: 16,
     paddingBottom: 8,
+    alignItems: 'center',
   },
   locationText: {
     color: '#666',
     fontSize: 14,
+    marginTop: 8,
   },
+ 
   titleText: {
     fontSize: 24,
     fontWeight: 'bold',
@@ -126,12 +132,12 @@ const styles = StyleSheet.create({
     color: '#666',
   },
   pricingContainer: {
-    backgroundColor:'gray',
+    backgroundColor: 'gray',
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
     marginTop: 0,
-    padding: '20px',
+    padding: 20,
   },
   priceText: {
     fontSize: 20,
